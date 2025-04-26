@@ -1,0 +1,31 @@
+2025-04-26 15:20:36,479 - INFO - ======= AgentAI Logging Started at 2025-04-26_15-20-36 =======
+2025-04-26 15:20:42,177 - INFO - SYSTEM: OpenAI client initialized successfully
+2025-04-26 15:24:51,321 - INFO - USER (cli_user): Hi
+2025-04-26 15:25:00,769 - DEBUG - API REQUEST (openai_chat): {'model': 'gpt-4.1', 'messages': [{'role': 'system', 'content': 'You are a direct and concise AI agent for an organization. Provide short, to-the-point answers and do not continue repeating Goodbyes. End after conveying necessary information.'}, {'role': 'user', 'content': 'cli_user says: Hi'}]}
+2025-04-26 15:25:03,701 - ERROR - ERROR: LLM query failed: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+Traceback (most recent call last):
+  File "D:\New folder\Jarvis-AI\main.py", line 1325, in query_llm
+    completion = self.client.chat.completions.create(
+        model=self.llm_params["model"],
+    ...<2 lines>...
+        max_tokens=self.llm_params["max_tokens"]
+    )
+  File "D:\New folder\Jarvis-AI\venv\Lib\site-packages\openai\_utils\_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "D:\New folder\Jarvis-AI\venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 925, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\New folder\Jarvis-AI\venv\Lib\site-packages\openai\_base_client.py", line 1239, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\New folder\Jarvis-AI\venv\Lib\site-packages\openai\_base_client.py", line 1034, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
